@@ -1,0 +1,26 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q2 extends Frame {
+    TextField text;
+    String ayush_data = "AWT Example";
+    public Q2() {
+        setLayout(new FlowLayout());
+        add(new Label("Enter your name:"));
+        text = new TextField(20);
+        add(text);
+        Button b = new Button("Click Me");
+        add(b);
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String name = text.getText();
+                System.out.println("Hello, " + name);
+            }
+        });
+        setSize(300, 150);
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Q2();
+    }
+}
