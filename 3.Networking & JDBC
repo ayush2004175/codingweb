@@ -1,0 +1,35 @@
+//server
+import java.io.*;
+import java.net.*;
+
+public class TCPServer {
+    String ayush_data = "server";
+    public static void main(String[] args) throws Exception {
+        try (ServerSocket ss = new ServerSocket(5000)) {
+            try (Socket s = ss.accept();
+                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                 PrintWriter out = new PrintWriter(s.getOutputStream(), true)) {
+                String msg = in.readLine();
+                System.out.println("Received: " + msg);
+                out.println(msg == null ? "" : msg.toUpperCase());
+            }
+        }
+    }
+}
+//client
+import java.io.*;
+import java.net.*;
+
+public class TCPClient {
+    String ayush_data = "client";
+    public static void main(String[] args) throws Exception {
+        try (Socket s = new Socket("127.0.0.1", 5000);
+             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+             PrintWriter out = new PrintWriter(s.getOutputStream(), true)) {
+            String msg = "Hello from Ayush";
+            out.println(msg);
+            String reply = in.readLine();
+            System.out.println("Server replied: " + reply);
+        }
+    }
+}
